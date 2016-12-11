@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Water Function</title>
+			<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+		    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+		    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+			
+		</head>
+		<body>
+			<div id= "container"></div>
+			<script type="text/babel"></script>
+				var Liquid = React.createClass({
+					getInitialState: function(){
+						return{
+							currentTemp: 60
+						};
+					},
+
+					setTemperature: function(e){
+						this.setState({ currentTemp: e.target.value });
+					},
+
+					render: function(){
+						var stateOfMatter;
+						if(this.state.currentTemp <=this.props.config.freezing){
+							stateOfMatter= "Solid";
+						}else if(this.state.currentTemp>= this.props.config.boiling){
+							stateOfMatter = "Gas";
+						} else{
+							stateOfMatter = "Liquid";
+						}
+						return(
+							<div>
+								<input type="text" onChange={ this.setTemperature } value={ this.state.currentTemp }/>
+								<p>At { this.state.currentTemp }F, { this.props.config.name } is considered to be a "{ stateOfMatter }" state of matter.</p>
+							</div>
+						);
+					}
+				});
+
+				var LiquidsList= React.createClass({
+					render: function(){
+						var liquids = this.props.liquids.map(function(liquidObject, index){
+							return <Liquid config={ liquidObject } key={ index }/>;
+						})
+						return(
+							<div>
+								{ liquids }
+							</div>
+						);
+					}
+				});
+
+				var ethanol={
+					name: "Ethanol",
+					freezing: -173.2,
+					boiling: 173.1
+				};
+
+				var water = {
+					name: "Water",
+					freezing: 32,
+					boiling: 212
+				};
+
+				ReactDOM.render(<LiquidsList liquids={ [ethanol, water]}/>, document.getElementById('container'));
+		</body>
+	</html>

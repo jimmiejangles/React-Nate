@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Water Function</title>
+			<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+		    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+		    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+			
+		</head>
+		<body>
+			<div id= "container"></div>
+			<script type="text/babel"></script>
+				var Water = React.createClass({
+					getInitialState: function(){
+						return{
+							currentTemp: 60
+						};
+					},
+
+					setTemperature: function(e){
+						this.setState({ currentTemp: e.target.value });
+					},
+
+					render: function(){
+						var stateOfMatter;
+						if(this.state.currentTemp <=32){
+							stateOfMatter= "Solid";
+						}else if(this.state.currentTemp>= 212){
+							stateOfMatter = "Gas";
+						} else{
+							stateOfMatter = "Liquid";
+						}
+						return(
+							<div>
+								<input type="text" onChange={ this.setTemperature } value={ this.state.currentTemp }/>
+								<p>At { this.state.currentTemp }F, water is considered to be a "{ stateOfMatter }" state of matter.</p>
+							</div>
+						);
+					}
+				});
+
+				ReactDOM.render(<Water />, document.getElementById("container"));
+		</body>
+	</html>

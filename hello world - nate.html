@@ -1,0 +1,27 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Hello World!</title>
+			<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+		    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+		    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+			
+		</head>
+		<body>
+			<div id= "container"></div>
+			<script type="text/babel"></script>
+				var Hello = React.createClass({
+					render: function(){
+						var myStyleClass = "exampleCss"; //Always use className instead of class in JSX
+						var targetOfGreeting = "world";
+						return ( //Best Practice to wrap return statement in parentheses for multiple lines
+							<div className={ myStyleClass } >
+								Hello, { targetOfGreeting }!
+							</div>
+						);
+					}
+				});
+
+				ReactDOM.render(<Hello />, document.getElementById("container"));
+		</body>
+	</html>
